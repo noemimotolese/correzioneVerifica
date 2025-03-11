@@ -112,3 +112,11 @@ while True:
           print("categoria e tipologia piatto insesistenti")
       else:
           media(dizionario, categoriaChef, tipoPiatto)
+'''
+punto 1 ok
+punto 2 ok
+punto 3 ho sbagliato a creare la lista, perchè dovevo aggiungere una tupla
+punto 4 ok
+punto 5 ok
+punto 6A e 6B ho sbagliato a fare la somma perchè ho aggiunto al totale la tupla invece di sommare i singoli valori
+'''
