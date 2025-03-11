@@ -1,0 +1,114 @@
+import random
+dizionario={
+    "Mario Rossi": [("Antipati", (8,7,9), "Junior Chef"), ("Primi", (7,8,8), "Junior Chef"), ("Secondi", (9,9,8), "Junior Chef"), ("Dessert", (8,8,9), "Junior Chef")],
+    "Luigi Bianchi": [("Antipati", (7,7,8), "Senior Chef"), ("Primi", (8,9,7), "Senior Chef"), ("Secondi", (7,8,7), "Senior Chef"), ("Dessert", (9,8,8), "Senior Chef")],
+    "Giulia Verdi": [("Antipati", (9,8,8), "Junior Chef"), ("Primi", (8,7,9), "Junior Chef"), ("Secondi", (8,8,8), "Junior Chef"), ("Dessert", (7,9,8), "Junior Chef")]
+}
+
+dizionario["Noemi Motolese"]=[("Antipati", (8,7,9), "Junior Chef"), ("Primi", (7,5,8), "Junior Chef"), ("Secondi", (9,9,8), "Junior Chef"), ("Dessert", (8,8,9), "Junior Chef")]
+
+def aggiungi_categoria():
+    for chiavi, valori in dizionario.items():
+        for valore in valori:
+            tipo, (creatività, gusto, presentazione), categoria = valore
+            n1 = random.randint(1, 10)
+            n2 = random.randint(1, 10)
+            n3 = random.randint(1, 10)
+            nuovo_piatto = ("Piatti unici", (n1, n2, n3), categoria)
+        dizionario[chiavi].append(nuovo_piatto)
+aggiungi_categoria()
+print(dizionario)
+
+def stampa_chef(chef):
+  for chiavi, valori in dizionario.items():
+    if chef==chiavi:
+      for valore in valori:
+        tipo, (creatività, gusto, presentazione), categoria=valore
+        print(f"nome e cognome: {chiavi}")
+        print(f"tipo: {tipo}")
+        print(f"creatività: {creatività}")
+        print(f"gusto: {gusto}")
+        print(f"presentazione: {presentazione}")
+        print(f"categoria: {categoria}")
+
+
+def stampa_categoria(piatto):
+  for chiavi, valori in dizionario.items():
+    for valore in valori:
+      tipo, (creatività, gusto, presentazione), categoria=valore
+      if piatto==tipo:
+        print(f"nome e cognome: {chiavi}")
+        print(f"tipo: {tipo}")
+        print(f"creatività: {creatività}")
+        print(f"gusto: {gusto}")
+        print(f"presentazione: {presentazione}")
+        print(f"categoria: {categoria}")
+
+def punteggioMax(dizionario, categoriaChef, tipoPiatto):
+  tot=0
+  somma=0
+  max=0
+  tupla_max=()
+
+  for chiavi, valori in dizionario.items():
+    for valore in valori:
+      tipo, (creatività, gusto, presentazione), categoria=valore
+      if categoriaChef==categoria and tipoPiatto==tipo:
+        tot=creatività + gusto + presentazione
+        if tot>max:
+          max=tot
+          tupla_max=(creatività, gusto, presentazione)
+  print(max)
+  for chiavi, valori in dizionario.items():
+    for valore in valori:
+      tipo, (creatività, gusto, presentazione), categoria=valore
+      if categoriaChef==categoria and tipoPiatto==tipo:
+        tot= creatività + gusto + presentazione
+        if tot==max:
+          tupla_max=(creatività, gusto, presentazione)
+          print(chiavi)
+  print(tupla_max)
+
+def media(dizionario, categoriaChef, tipoPiatto):
+  somma=0
+  conta=0
+  for chiavi, valori in dizionario.items():
+    for valore in valori:
+      tipo, (creatività, gusto, presentazione), categoria=valore
+      if categoriaChef==categoria and tipoPiatto==tipo:
+        somma+=creatività + gusto + presentazione
+        conta+=1
+  media=somma/conta
+  print(f"la media è: {media}")
+
+while True:
+    scelta=int(input("scegli: "))
+    if scelta==0:
+        print("esci")
+        break
+    elif scelta==1:
+        chef=input("inserisci nome dello chef: ")
+        if chef in dizionario.keys():
+            stampa_chef(chef)
+        else:
+            print("chiave insesistente")
+    elif scelta==2:
+        piatto=input("inserisci tipo piatto: ")
+        if piatto!="Antipati" and piatto!="Primi" and piatto!="Secondi" and piatto!="Dessert" and piatto!="Piatti unici":
+            print("tipo piatto insesistente")
+        else:
+            stampa_categoria(piatto)
+    elif scelta==3:
+        categoriaChef=input("inserisci la categoria dello chef: ")
+        tipoPiatto=input("inserisci tipo piatto: ")
+        if categoriaChef!= "Junior Chef" and categoriaChef!= "Senior Chef" and tipoPiatto!="Antipati" and tipoPiatto!="Primi" and tipoPiatto!="Secondi" and tipoPiatto!="Dessert" and tipoPiatto!="Piatti unici":
+            print("categoria e tipologia piatto insesistenti")
+        else:
+            punteggioMax(dizionario, categoriaChef, tipoPiatto)
+    elif scelta==4:
+      categoriaChef=input("inserisci la categoria dello chef: ")
+      tipoPiatto=input("inserisci tipo piatto: ")
+      if categoriaChef!= "Junior Chef" and categoriaChef!= "Senior Chef" and tipoPiatto!="Antipati" and tipoPiatto!="Primi" and tipoPiatto!="Secondi" and tipoPiatto!="Dessert" and tipoPiatto!="Piatti unici":
+          print("categoria e tipologia piatto insesistenti")
+      else:
+          media(dizionario, categoriaChef, tipoPiatto)
